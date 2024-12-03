@@ -30,8 +30,6 @@ function solution(priorities, location) {
             answer = i+1;
         }
     }
-    
-    console.log(answer_array);
 
     return answer;
 }
