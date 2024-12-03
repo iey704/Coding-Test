@@ -1,23 +1,19 @@
 function solution(s){
     var answer = true;
-    var number = 0;
-
+    let count = 0;
+    
     for(let i=0;i<s.length;i++){
-        if(s[i]=="("){
-            number++;
+        if(s[i] === "("){
+           count++; 
+        } else{
+            count--;
         }
-        else if(s[i]==")"){
-            number--;      
-            if(number<0) return false;
-        }        
+        
+        if(count<0) return false;
     }
     
-    if(number!=0) {
-        return false;
-    }
-    else{
-        return true;
-    }
+    if(count === 0) return true;
+    else return false;
     
     return answer;
 }
