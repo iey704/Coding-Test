@@ -1,19 +1,22 @@
 function solution(s){
     var answer = true;
-    let count = 0;
-    
-    for(let i=0;i<s.length;i++){
-        if(s[i] === "("){
-           count++; 
-        } else{
-            count--;
-        }
+    let queue = [];
+
+    for(let i=0; i<s.length; i++){
         
-        if(count<0) return false;
+        if(s[0]===')'){
+            answer = false;
+            break;
+        } else{
+            if(s[i]==='('){
+                queue.push(s[i]);
+            } else {
+                queue.shift();
+            }
+        }
     }
     
-    if(count === 0) return true;
-    else return false;
-    
+    if(queue.length != 0) answer = false;
+
     return answer;
 }
