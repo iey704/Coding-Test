@@ -1,24 +1,25 @@
 function solution(progresses, speeds) {
     var answer = [];
-    var remainDay = [];
+    let remainTimes = [];
+    let count = 0;
     
     for(let i=0;i<progresses.length;i++){
-        remainDay.push(Math.ceil((100-progresses[i])/speeds[i]));
+        let remainTime = Math.ceil((100-progresses[i]) / speeds[i]);
+        remainTimes.push(remainTime);
     }
-    // console.log(remainDay);
+
+    let maxTime = remainTimes[0];
     
-    let maxDay = remainDay[0];
-    let count = 0;
-    for(let j=0;j<remainDay.length;j++){
-        if(remainDay[j]<=maxDay){
+    for(let j=0; j<remainTimes.length; j++){
+        if(maxTime >= remainTimes[j]){
             count++;
-        }else{
+        } else {
             answer.push(count);
             count = 1;
-            maxDay = remainDay[j];
+            maxTime = remainTimes[j];
         }
+       
     }
     answer.push(count);
-    
     return answer;
 }
