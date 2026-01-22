@@ -1,4 +1,3 @@
-# https://github.com/choam2426/AI-Algorithm-Mentor?tab=readme-ov-file 참고
 name: 🤖 AI Algorithm Mentor
 
 on:
@@ -14,7 +13,7 @@ jobs:
       - uses: choam2426/AI-Algorithm-Mentor@v5
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          LLM_PROVIDER: openai            # openai, google, anthropic
-          MODEL_NAME: gpt-5.1  # 모델명 (선택사항)
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          REVIEW_LANGUAGE: korean           # korean, english, etc..
+          LLM_PROVIDER: openai
+          MODEL_NAME: gpt-5.1
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          REVIEW_LANGUAGE: korean
