@@ -31,3 +31,5 @@ console.log(answer.length);
 for(let k=0; k<answer.length; k++){
     console.log(answer[k]);
 }
+
+// 자동 리뷰 test 
