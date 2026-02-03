@@ -7,24 +7,34 @@ for (let i = 1; i <= n; i++) {
     map.push(input[i].split('').map(Number));
 }
 
-let visited = Array.from({ length: n }, () => Array(n).fill(false));
+let x = 0, y = 0;
+let visited = Array.from({ length: n }, () => new Array(n).fill(false));
 let dx = [-1, 1, 0, 0];
 let dy = [0, 0, -1, 1];
+
 let answer = [];
+
 for (let i = 0; i < n; i++) {
-    for (j = 0; j < map.length; j++) {
+    for (let j = 0; j < map.length; j++) {
+        // 방문하지 않은 집일 때만 bfs 돌기
         if (map[i][j] === 1 && !visited[i][j]) {
             answer.push(bfs(i, j));
         }
     }
 }
 
-function bfs(x, y) {
-    let queue = [];
-    let count = 1;
+// 정답 출력
+console.log(answer.length);
+answer.sort((a, b) => a - b);
+for (let i = 0; i < answer.length; i++) {
+    console.log(answer[i]);
+}
 
+// BFS 함수
+function bfs(x, y) {
+    let count = 1;
+    let queue = [[x, y]];
     visited[x][y] = true;
-    queue.push([x, y]);
 
     while (queue.length > 0) {
         let [xx, yy] = queue.shift();
@@ -34,15 +44,11 @@ function bfs(x, y) {
             let ny = yy + dy[i];
 
             if (nx >= 0 && nx < n && ny >= 0 && ny < n && map[nx][ny] === 1 && !visited[nx][ny]) {
-                visited[nx][ny] = true;
                 queue.push([nx, ny]);
+                visited[nx][ny] = true;
                 count++;
             }
         }
     }
     return count;
 }
-
-answer.sort((a, b) => a - b);
-console.log(answer.length);
-answer.forEach(c => console.log(c));
