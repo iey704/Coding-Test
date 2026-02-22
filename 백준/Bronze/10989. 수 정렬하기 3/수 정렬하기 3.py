@@ -11,4 +11,4 @@ for i in range(n):
 for j in range(arr_num):
     if count_arr[j] != 0:
         for k in range(count_arr[j]):
-            print(j)
+            sys.stdout.write(str(j)+'\n')
