@@ -1,0 +1,58 @@
+import sys
+import heapq
+
+input = sys.stdin.readline
+
+w, h = list(map(int, input().split()))
+grid = []
+for _ in range(w):
+	grid.append(input().strip())
+
+candidate = []
+# S 좌표 찾기
+for s_w in range(w):
+	s_h = (grid[s_w].find('S'))
+	if s_h != -1: 
+		x, y = s_w, s_h
+		break
+
+dirs = [(-1,0), (0,-1), (1,0), (0,1)]  # 이동 가능 범위
+priority = {'E': 0, 'P': 1, '0': 2}
+visited = set()
+visited.add((x,y)) # S 시작점 추가
+danger = 0
+pos = 'S'
+
+while pos != 'E':
+	for dx, dy in dirs:
+		# 1. 현재 좌표 기준 방향 탐색: 방문하지 않은 좌표일 경우, 후보 좌표에 추가
+		nx, ny = x + dx, y+ dy 
+		if 0 <= nx < w and 0 <= ny < h and (nx,ny) not in visited: 
+			cell = grid[nx][ny]
+			p = priority[cell]
+			heapq.heappush(candidate, (p, nx, ny))  
+			visited.add((nx, ny))
+
+	# 2. 우선순위 큐를 구현: 다음 포인트 선택
+	next_point = heapq.heappop(candidate) 
+	
+	# 3. 현재 위치 업데이트
+	p, x, y = next_point
+	pos = grid[x][y]
+	
+	# 4. 위험 점수 계산
+	p_count = 0
+	for i in range(x-1, x+2): # x-1, x, x+1
+		for j in range(y-1, y+2): # y-1, y, y+1
+			if 0 <= i < w and 0 <= j < h:
+				if (i, j) != (x, y) and grid[i][j] == 'P':
+					p_count += 1	
+	if pos == '0':
+		danger += p_count
+	elif pos == 'P':
+		danger += (p_count - 3)
+
+if danger < 0:
+	print(0)
+else: 
+	print(danger)
