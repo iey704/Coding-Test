@@ -1,0 +1,17 @@
+import sys
+input = sys.stdin.readline
+n, m = list(map(int, input().split()))
+arr = []
+for _ in range(m):
+	arr.append(input().strip())
+
+cards = set()
+answer = 0
+for i in range(m):
+	if arr[i] not in cards:
+		cards.add(arr[i])
+		if len(cards) == n:
+			answer = i+1
+			break
+
+print(answer if answer>0 else -1)
