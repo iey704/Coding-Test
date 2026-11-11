@@ -20,7 +20,6 @@ def solution(progresses, speeds):
             count = count + 1
         else:
             answer.append(count)
-            count = 1
             max = time[j]
             count = 1    
             
